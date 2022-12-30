@@ -56,9 +56,11 @@ class _LoginViewState extends State<LoginView> {
               final password = _password.text;
 
               try {
-                final userCredentials = await FirebaseAuth.instance
-                    .signInWithEmailAndPassword(
-                        email: email, password: password);
+                final userCredentials =
+                    await FirebaseAuth.instance.signInWithEmailAndPassword(
+                  email: email,
+                  password: password,
+                );
                 print(userCredentials);
               } on FirebaseAuthException catch (e) {
                 if (e.code == 'user-not-found') {
@@ -74,11 +76,12 @@ class _LoginViewState extends State<LoginView> {
             child: const Text('Login'),
           ),
           TextButton(
-              onPressed: () {
-                Navigator.of(context)
-                    .pushNamedAndRemoveUntil('/register/', (route) => false);
-              },
-              child: const Text('Not registered yet? Register here!'))
+            onPressed: () {
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil('/register/', (route) => false);
+            },
+            child: const Text('Not registered yet? Register here!'),
+          )
         ],
       ),
     );

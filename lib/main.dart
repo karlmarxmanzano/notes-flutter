@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:notes/view/login_view.dart';
 import 'package:notes/view/register_view.dart';
 import 'package:notes/view/verify_email_view.dart';
-import 'dart:developer' as devtools show log;
+// import 'dart:developer' as devtools show log;
 
 import 'firebase_options.dart';
 
