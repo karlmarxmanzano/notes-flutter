@@ -46,24 +46,29 @@ class NotesService {
   }
 
   Future<DatabaseNote> updateNote({
-    required int id,
+    required DatabaseNote note,
     required String text,
   }) async {
     await _ensureDbIsOpen();
 
     final db = _getDatabaseOrThrow();
 
-    await getNote(id: id);
+    await getNote(id: note.id);
 
-    final updateCount = await db.update(noteTable, {
-      textColumn: text,
-      isSyncedWithCloudColumn: 0,
-    });
+    final updateCount = await db.update(
+      noteTable,
+      {
+        textColumn: text,
+        isSyncedWithCloudColumn: 0,
+      },
+      where: 'id = ?',
+      whereArgs: [note.id],
+    );
 
     if (updateCount == 0) {
       throw CouldNotUpdateNoteException();
     } else {
-      final updatedNote = await getNote(id: id);
+      final updatedNote = await getNote(id: note.id);
 
       _notes.removeWhere((note) => note.id == updatedNote.id);
       _notes.add(updatedNote);

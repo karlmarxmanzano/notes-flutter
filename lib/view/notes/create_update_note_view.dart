@@ -33,7 +33,7 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
     final text = _textController.text;
 
     await _notesService.updateNote(
-      id: note.id,
+      note: note,
       text: text,
     );
   }
@@ -82,7 +82,7 @@ class _CreateUpdateNoteViewState extends State<CreateUpdateNoteView> {
 
     if (note != null && text.isNotEmpty) {
       await _notesService.updateNote(
-        id: note.id,
+        note: note,
         text: text,
       );
     }
